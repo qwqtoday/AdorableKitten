@@ -137,10 +137,11 @@ export function configureBot(bot: RGBot) {
         const isActiveFunction = () => {return matchInProgress && currentMainLoopInstance===mainLoopInstanceTracker}
         while (isActiveFunction()) {
             try {
-                bot.pathfinder().movements.updateCollisionIndex()
                 // always throttle the runtime first to make sure we don't execute too frequently and waste CPU
                 await throttleRunTime(bot)
                 
+                // updates the collision index
+                bot.pathfinder().movements.updateCollisionIndex()
                 
                 // find out which team I'm on
                 const myTeamName: string = bot.getMyTeam()
