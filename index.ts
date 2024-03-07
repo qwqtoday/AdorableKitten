@@ -37,6 +37,8 @@ export function configureBot(bot: RGBot) {
     // We recommend disabling this on as you can't dig the CTF map.  Turning this on can lead pathfinding to get stuck.
     bot.allowDigWhilePathing(false)
 
+    bot.pathfinder().movements.updateCollisionIndex()
+    
     // Setup the rg-ctf-utils with debug logging
     const rgctfUtils = new RGCTFUtils(bot)
     rgctfUtils.setDebug(true)
@@ -123,7 +125,7 @@ export function configureBot(bot: RGBot) {
 
     // You could write all the code inside this spawn listener, but we separate it out into its own mainLoop function
     bot.on('spawn', async () => {
-        bot.chat(`I have come to win Capture The Flag with my main loop.`)
+        bot.chat(`meow meow meow!`)
         await mainLoop()
     })
 
@@ -140,7 +142,8 @@ export function configureBot(bot: RGBot) {
 
                 // always throttle the runtime first to make sure we don't execute too frequently and waste CPU
                 await throttleRunTime(bot)
-
+                
+                
                 // find out which team I'm on
                 const myTeamName: string = bot.getMyTeam()
                 const otherTeamName: string = bot.matchInfo().teams.find(t => t.name != myTeamName)?.name

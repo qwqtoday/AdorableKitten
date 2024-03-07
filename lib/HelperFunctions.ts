@@ -110,7 +110,7 @@ async function moveTowardPosition(bot: RGBot, targetPosition: Vec3, reach: numbe
             console.log(`[Movement] Reached target position: ${bot.vecToString(targetPosition)}`)
         } else {
             // DO NOT AWAIT PATHING... WE'LL INTERRUPT IT LATER WITH A NEW TARGET IF NEED BE
-            bot.mineflayer().pathfinder.goto(new goals.GoalNear(targetPosition.x, targetPosition.y, targetPosition.z, reach)).then(() => {
+            bot.pathfinder().goto(new goals.GoalNear(targetPosition.x, targetPosition.y, targetPosition.z, reach)).then(() => {
                 console.log(`[Movement] Reached target position: ${bot.vecToString(targetPosition)}`)
                 lastMovePosition = null
             }).catch((err) => {
