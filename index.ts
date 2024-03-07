@@ -36,8 +36,6 @@ export function configureBot(bot: RGBot) {
 
     // We recommend disabling this on as you can't dig the CTF map.  Turning this on can lead pathfinding to get stuck.
     bot.allowDigWhilePathing(false)
-
-    bot.pathfinder().movements.updateCollisionIndex()
     
     // Setup the rg-ctf-utils with debug logging
     const rgctfUtils = new RGCTFUtils(bot)
@@ -139,7 +137,7 @@ export function configureBot(bot: RGBot) {
         const isActiveFunction = () => {return matchInProgress && currentMainLoopInstance===mainLoopInstanceTracker}
         while (isActiveFunction()) {
             try {
-
+                bot.pathfinder().movements.updateCollisionIndex()
                 // always throttle the runtime first to make sure we don't execute too frequently and waste CPU
                 await throttleRunTime(bot)
                 
